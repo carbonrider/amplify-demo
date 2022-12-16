@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({ apiKey }: { apiKey: string }) {
   return (
     <>
       <Head>
@@ -21,21 +21,7 @@ export default function Home() {
             <code className={styles.code}>pages/index.tsx</code>
           </p>
           <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+            vercel {apiKey}
           </div>
         </div>
 
@@ -120,4 +106,15 @@ export default function Home() {
       </main>
     </>
   )
+}
+
+export const getServerSideProps = async () => {
+
+  const apiKey = process.env.API_KEY
+
+  return {
+    props: {
+      apiKey
+    }
+  }
 }
